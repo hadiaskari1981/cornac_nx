@@ -55,6 +55,10 @@ def ubit_parser(tokens, **kwargs):
     return [(tokens[0], tokens[1], tokens[2], int(tokens[3]))]
 
 
+def uird_parser(tokens, **kwargs):
+    return [(tokens[0], tokens[1], float(tokens[2]), str(tokens[3]))]
+
+
 def ubitjson_parser(tokens, **kwargs):
     return [
         (tokens[0], tokens[1], tokens[2], int(tokens[3]), ast.literal_eval(tokens[4]))
@@ -83,6 +87,7 @@ PARSERS = {
     "UI": ui_parser,
     "UIR": uir_parser,
     "UIRT": uirt_parser,
+    "UIRD": uird_parser,
     "UITup": tup_parser,
     "UIReview": review_parser,
     "UBI": ubi_parser,
