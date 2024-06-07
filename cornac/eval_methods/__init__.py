@@ -15,7 +15,7 @@
 
 from .base_method import rating_eval
 from .base_method import ranking_eval
-
+from .timestamp_split import TimeSplit
 from .base_method import BaseMethod
 from .ratio_split import RatioSplit
 from .stratified_split import StratifiedSplit
@@ -27,6 +27,7 @@ from .propensity_stratified_evaluation import PropensityStratifiedEvaluation
 __all__ = [
     "BaseMethod",
     "RatioSplit",
+    "TimeSplit",
     "StratifiedSplit",
     "CrossValidation",
     "NextBasketEvaluation",
