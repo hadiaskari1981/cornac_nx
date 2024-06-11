@@ -80,8 +80,18 @@ class TimeSplit(BaseMethod):
         split_point = max_timestamp - dateutil.relativedelta.relativedelta(months=1)
         split_point = split_point.strftime("%Y-%m-%d")
 
-        train_data = [t for t in tqdm(self.data) if t[3] < split_point]
-        test_data = [t for t in tqdm(self.data) if t[3] >= split_point]
+        train_data, test_data = [], []
+        for t in tqdm(self.data):
+            if t[3] < split_point:
+                train_data.append(t)
+            else:
+                test_data.append(t)
+        # train_data = [t for t in tqdm(self.data) if t[3] < split_point]
+        print("len train dataset", len(train_data))
+        uids = [t[0] for t in train_data]
+        test_data = [t for t in tqdm(test_data) if t[0] in uids]
+        print("len test dataset", len(test_data))
+
         val_data = None
 
         self.build(train_data=train_data, test_data=test_data, val_data=val_data)

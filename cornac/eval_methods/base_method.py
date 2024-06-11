@@ -221,6 +221,8 @@ def ranking_eval(
 
     # avg results of ranking metrics
     for i, mt in enumerate(metrics):
+        if len(user_results[i]) == 0:
+            continue
         avg_results.append(sum(user_results[i].values()) / len(user_results[i]))
 
     return avg_results, user_results
@@ -690,7 +692,10 @@ class BaseMethod:
             verbose=verbose,
         )
         for i, mt in enumerate(ranking_metrics):
-            metric_avg_results[mt.name] = avg_results[i]
+            if len(avg_results) != 0:
+                metric_avg_results[mt.name] = avg_results[i]
+            else:
+                metric_avg_results[mt.name] = 0
             metric_user_results[mt.name] = user_results[i]
 
         return Result(model.name, metric_avg_results, metric_user_results)
@@ -759,6 +764,7 @@ class BaseMethod:
         test_time = time.time() - start
         test_result.metric_avg_results["Train (s)"] = train_time
         test_result.metric_avg_results["Test (s)"] = test_time
+        test_result.metric_avg_results["Rating_threshold"] = self.rating_threshold
 
         val_result = None
         if show_validation and self.val_set is not None:

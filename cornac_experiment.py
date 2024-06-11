@@ -1,6 +1,6 @@
 import cornac
 import pandas as pd
-
+from cornac.models import SVD
 from cornac.eval_methods import RatioSplit, TimeSplit
 from cornac import models
 from cornac.metrics import MAE, RMSE, Precision, Recall, NDCG, AUC, MAP
